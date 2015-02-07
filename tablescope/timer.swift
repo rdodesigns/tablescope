@@ -72,7 +72,7 @@ class Timer {
     :param: f The function to call each time the timer triggers.
     :returns: A new Timer object.
     */
-      class func scheduledTimerWithTimeInterval(interval : NSTimeInterval,
+    class func scheduledTimerWithTimeInterval(interval : NSTimeInterval,
                                               repeats : Bool,
                                               f : () -> ())
     {
