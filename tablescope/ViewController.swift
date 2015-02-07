@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view, typically from a nib.
+        // Do any additional setup after loading the view.
         captureSession.sessionPreset = AVCaptureSessionPresetHigh
         
         let devices = AVCaptureDevice.devices()
@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         for device in devices {
             // Make sure this particular device supports video
             if (device.hasMediaType(AVMediaTypeVideo)) {
-                // Finally check the position and confirm we've got the back camera
+                // Check the position and confirm we've got the back camera
                 if(device.position == AVCaptureDevicePosition.Back) {
                     captureDevice = device as? AVCaptureDevice
                     if captureDevice != nil {
@@ -44,14 +44,29 @@ class ViewController: UIViewController {
             }
         }
         
+        Timer.scheduledTimerWithTimeInterval(
+            NSDate().dateByAddingTimeInterval(5), interval: 1,
+            repeats: false, f:
+            {
+                UIScreen.mainScreen().brightness = CGFloat(0)
+                println("Setting the display to lowest brightness")
+            })
+        
+        Timer.scheduledTimerWithTimeInterval(
+            NSDate().dateByAddingTimeInterval(10), interval: 1,
+            repeats: false, f:
+            {
+                UIScreen.mainScreen().brightness = CGFloat(1)
+                println("Setting the display to full brightness")
+            })
+        
     }
     
     func focusTo(value : Float) {
         if let device = captureDevice {
             if(device.lockForConfiguration(nil)) {
-                device.setFocusModeLockedWithLensPosition(value, completionHandler: { (time) -> Void in
-                    //
-                })
+                device.setFocusModeLockedWithLensPosition(value,
+                    completionHandler: {(time) -> Void in })
                 device.unlockForConfiguration()
             }
         }
@@ -84,7 +99,8 @@ class ViewController: UIViewController {
         configureDevice()
         
         var err : NSError? = nil
-        captureSession.addInput(AVCaptureDeviceInput(device: captureDevice, error: &err))
+        captureSession.addInput(AVCaptureDeviceInput(device: captureDevice,
+            error: &err))
         
         if err != nil {
             println("error: \(err?.localizedDescription)")
