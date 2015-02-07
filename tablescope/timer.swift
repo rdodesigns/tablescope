@@ -26,7 +26,7 @@ The design of this class is designed to match NSTimer.
 */
 class Timer {
 
-    let timer : NSTimer?
+    let timer : NSTimer!
 
     let fireDate : NSDate
     let timeInvterval : NSTimeInterval
@@ -77,7 +77,7 @@ class Timer {
                                               f : () -> ())
     {
         var t = Timer(interval: interval, repeats: repeats, f)
-        NSRunLoop.mainRunLoop().addTimer(t.timer!,
+        NSRunLoop.mainRunLoop().addTimer(t.timer,
             forMode: NSRunLoopCommonModes)
     }
 
@@ -103,7 +103,7 @@ class Timer {
     {
         var t = Timer(fireDate: fireDate, interval: interval,
             repeats: repeats, f)
-        NSRunLoop.mainRunLoop().addTimer(t.timer!,
+        NSRunLoop.mainRunLoop().addTimer(t.timer,
             forMode: NSRunLoopCommonModes)
     }
 
@@ -119,7 +119,7 @@ class Timer {
     Stop the triggered function from firing again.
     */
     func invalidate(){
-        timer!.invalidate()
+        timer.invalidate()
         valid = false
     }
 
