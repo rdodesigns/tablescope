@@ -173,7 +173,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 945425B61A85D92A00E1CCA7 /* Build configuration list for PBXProject "tablescope" */;
+			buildConfigurationList = 945425B61A85D92A00E1CCA7 /* Build configuration list for PBXProject "TableScope" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -398,7 +398,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		945425B61A85D92A00E1CCA7 /* Build configuration list for PBXProject "tablescope" */ = {
+		945425B61A85D92A00E1CCA7 /* Build configuration list for PBXProject "TableScope" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				945425D81A85D92A00E1CCA7 /* Debug */,
