@@ -28,7 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		945425BB1A85D92A00E1CCA7 /* tablescope.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tablescope.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		945425BB1A85D92A00E1CCA7 /* TableScope.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableScope.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		945425BF1A85D92A00E1CCA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		945425C01A85D92A00E1CCA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		945425C21A85D92A00E1CCA7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -71,7 +71,7 @@
 		945425BC1A85D92A00E1CCA7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				945425BB1A85D92A00E1CCA7 /* tablescope.app */,
+				945425BB1A85D92A00E1CCA7 /* TableScope.app */,
 				945425D01A85D92A00E1CCA7 /* tablescopeTests.xctest */,
 			);
 			name = Products;
@@ -131,9 +131,9 @@
 			);
 			dependencies = (
 			);
-			name = tablescope;
-			productName = tablescope;
-			productReference = 945425BB1A85D92A00E1CCA7 /* tablescope.app */;
+			name = TableScope;
+			productName = TableScope;
+			productReference = 945425BB1A85D92A00E1CCA7 /* TableScope.app */;
 			productType = "com.apple.product-type.application";
 		};
 		945425CF1A85D92A00E1CCA7 /* tablescopeTests */ = {
@@ -186,7 +186,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				945425BA1A85D92A00E1CCA7 /* tablescope */,
+				945425BA1A85D92A00E1CCA7 /* TableScope */,
 				945425CF1A85D92A00E1CCA7 /* tablescopeTests */,
 			);
 		};
