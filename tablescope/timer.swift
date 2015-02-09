@@ -28,9 +28,9 @@ class Timer {
 
     private let timer : NSTimer!
 
-    let fireDate : NSDate
-    let timeInvterval : NSTimeInterval
-    let f : () -> ()
+    private let fireDate : NSDate
+    private let timeInvterval : NSTimeInterval
+    private let f : () -> ()
 
     var valid  = true
 
