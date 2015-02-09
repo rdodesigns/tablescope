@@ -26,7 +26,7 @@ The design of this class is designed to match NSTimer.
 */
 class Timer {
 
-    let timer : NSTimer!
+    private let timer : NSTimer!
 
     let fireDate : NSDate
     let timeInvterval : NSTimeInterval
