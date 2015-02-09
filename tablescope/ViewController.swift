@@ -38,6 +38,15 @@ class ViewController: UIViewController {
                     captureDevice = device as? AVCaptureDevice
                     if captureDevice != nil {
                         println("Capture device found")
+                        
+                        var err : NSError? = nil
+                        captureSession.addInput(AVCaptureDeviceInput(device: captureDevice,
+                            error: &err))
+                        
+                        if err != nil {
+                            println("error: \(err?.localizedDescription)")
+                        }
+                        
                         beginSession()
                     }
                 }
@@ -48,68 +57,38 @@ class ViewController: UIViewController {
             NSDate().dateByAddingTimeInterval(5), interval: 1,
             repeats: false, f:
             {
+                self.endSession()
                 UIScreen.mainScreen().brightness = CGFloat(0)
-                println("Setting the display to lowest brightness")
+                println("Setting the display to lowest brightness, " +
+                        "disabling camera capture.")
             })
         
         Timer.scheduledTimerWithTimeInterval(
             NSDate().dateByAddingTimeInterval(10), interval: 1,
             repeats: false, f:
             {
+                self.beginSession()
                 UIScreen.mainScreen().brightness = CGFloat(1)
-                println("Setting the display to full brightness")
+                println("Setting the display to full brightness, " +
+                        "enabling camera capture.")
             })
         
     }
     
-    func focusTo(value : Float) {
-        if let device = captureDevice {
-            if(device.lockForConfiguration(nil)) {
-                device.setFocusModeLockedWithLensPosition(value,
-                    completionHandler: {(time) -> Void in })
-                device.unlockForConfiguration()
-            }
-        }
-    }
-    
-    let screenWidth = UIScreen.mainScreen().bounds.size.width
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        var anyTouch = touches.anyObject() as UITouch
-        var touchPercent = anyTouch.locationInView(self.view).x / screenWidth
-        focusTo(Float(touchPercent))
-    }
-    
-    override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
-        var anyTouch = touches.anyObject() as UITouch
-        var touchPercent = anyTouch.locationInView(self.view).x / screenWidth
-        focusTo(Float(touchPercent))
-    }
-    
-    func configureDevice() {
-        if let device = captureDevice {
-            device.lockForConfiguration(nil)
-            device.focusMode = .Locked
-            device.unlockForConfiguration()
-        }
-        
-    }
-    
     func beginSession() {
-        
-        configureDevice()
-        
-        var err : NSError? = nil
-        captureSession.addInput(AVCaptureDeviceInput(device: captureDevice,
-            error: &err))
-        
-        if err != nil {
-            println("error: \(err?.localizedDescription)")
+        if !captureSession.running{
+            previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+            self.view.layer.addSublayer(previewLayer)
+            previewLayer?.frame = self.view.layer.frame
+            captureSession.startRunning()
         }
-        
-        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        self.view.layer.addSublayer(previewLayer)
-        previewLayer?.frame = self.view.layer.frame
-        captureSession.startRunning()
+    }
+    
+    func endSession(){
+        if captureSession.running{
+            self.previewLayer?.removeFromSuperlayer()
+            captureSession.stopRunning()
+        }
     }
     
 }
