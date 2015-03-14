@@ -119,9 +119,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		945425BA1A85D92A00E1CCA7 /* tablescope */ = {
+		945425BA1A85D92A00E1CCA7 /* TableScope */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 945425DA1A85D92A00E1CCA7 /* Build configuration list for PBXNativeTarget "tablescope" */;
+			buildConfigurationList = 945425DA1A85D92A00E1CCA7 /* Build configuration list for PBXNativeTarget "TableScope" */;
 			buildPhases = (
 				945425B71A85D92A00E1CCA7 /* Sources */,
 				945425B81A85D92A00E1CCA7 /* Frameworks */,
@@ -237,7 +237,7 @@
 /* Begin PBXTargetDependency section */
 		945425D21A85D92A00E1CCA7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 945425BA1A85D92A00E1CCA7 /* tablescope */;
+			target = 945425BA1A85D92A00E1CCA7 /* TableScope */;
 			targetProxy = 945425D11A85D92A00E1CCA7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -345,9 +345,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = tablescope/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -355,9 +358,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = tablescope/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -407,7 +413,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		945425DA1A85D92A00E1CCA7 /* Build configuration list for PBXNativeTarget "tablescope" */ = {
+		945425DA1A85D92A00E1CCA7 /* Build configuration list for PBXNativeTarget "TableScope" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				945425DB1A85D92A00E1CCA7 /* Debug */,

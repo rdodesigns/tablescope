@@ -14,7 +14,7 @@ import UIKit
 import AVFoundation
 
 class ViewController: UIViewController {
-
+    
     let captureSession = AVCaptureSession()
     var previewLayer : AVCaptureVideoPreviewLayer?
 
@@ -40,6 +40,7 @@ class ViewController: UIViewController {
                         println("Capture device found")
 
                         var err : NSError? = nil
+                        captureSession.sessionPreset = AVCaptureSessionPresetPhoto;
                         captureSession.addInput(AVCaptureDeviceInput(device: captureDevice,
                             error: &err))
 
