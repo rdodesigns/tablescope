@@ -157,4 +157,17 @@ class ViewController: UIViewController {
         }
     }
 
+    func switchSession() -> Void {
+        if !captureSession.running{
+            daySession()
+        } else {
+            nightSession()
+        }
+    }
+
+    override func touchesBegan(touches: Set<NSObject>,
+                               withEvent event: UIEvent) {
+        switchSession()
+    }
+
 }
