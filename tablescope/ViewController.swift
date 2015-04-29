@@ -15,8 +15,8 @@ import AVFoundation
 
 let year_in_sec : NSTimeInterval = 84600
 
-let sleepTimeStart = (hour: 2, minute: 00)
-let sleepTimeStop = (hour: 1, minute: 00)
+let sleepTimeStart = (hour: 17, minute: 30)
+let sleepTimeStop = (hour: 8, minute: 30)
 
 class ViewController: UIViewController {
 
