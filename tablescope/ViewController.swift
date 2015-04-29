@@ -97,6 +97,9 @@ class ViewController: UIViewController {
         let order_stop = calendar!.compareDate(now, toDate: stopToday!,
             toUnitGranularity: .CalendarUnitMinute)
 
+        // TODO: If we switch to Swift 1.2+, use the late binding let 
+        // instead of var.
+        //
         // Here we will start the manipulations of the [start/stop]Today
         // dates to reflect the correct days to trigger on. This case 
         // corresponds to being in the morning night session.
