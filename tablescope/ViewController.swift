@@ -19,14 +19,14 @@ let sleepTimeStart = (hour: 2, minute: 00)
 let sleepTimeStop = (hour: 1, minute: 00)
 
 class ViewController: UIViewController {
-    
+
     let captureSession = AVCaptureSession()
     var previewLayer : AVCaptureVideoPreviewLayer?
 
     // If we find a device we'll store it here for later use
     var captureDevice : AVCaptureDevice?
 
-    override func viewDidLoad() {
+    override func viewDidLoad() -> Void {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
@@ -42,12 +42,13 @@ class ViewController: UIViewController {
                 if(device.position == AVCaptureDevicePosition.Back) {
                     captureDevice = device as? AVCaptureDevice
                     if captureDevice != nil {
-                        println("Capture device found")
 
                         var err : NSError? = nil
-                        captureSession.sessionPreset = AVCaptureSessionPresetPhoto;
-                        captureSession.addInput(AVCaptureDeviceInput(device: captureDevice,
-                            error: &err))
+                        captureSession.sessionPreset =
+                            AVCaptureSessionPresetPhoto
+                        captureSession.addInput(
+                            AVCaptureDeviceInput(device: captureDevice,
+                                                 error: &err))
 
                         if err != nil {
                             println("error: \(err?.localizedDescription)")
@@ -83,7 +84,8 @@ class ViewController: UIViewController {
 
     func beginSession() {
         if !captureSession.running{
-            previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+            previewLayer =
+                AVCaptureVideoPreviewLayer(session: captureSession)
             previewLayer?.transform = CATransform3DMakeScale(-1, -1, 1)
             self.view.layer.addSublayer(previewLayer)
             previewLayer?.frame = self.view.layer.frame
