@@ -58,6 +58,8 @@ class ViewController: UIViewController {
             }
         }
 
+        // Disable the screen lock from occurring.
+        UIApplication.sharedApplication().idleTimerDisabled = true
 
         assert(sleepTimeStart.hour > sleepTimeStop.hour ||
                   (sleepTimeStart.hour == sleepTimeStop.hour &&
