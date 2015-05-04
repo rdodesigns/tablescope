@@ -138,6 +138,13 @@ class ViewController: UIViewController {
             stopDate, interval: year_in_sec,
             repeats: true, f: { self.daySession() })
 
+        // If we press down on the screen for 2 seconds switch current
+        // mode
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self,
+            action: "longPress:")
+        longPressRecognizer.minimumPressDuration = 2.0
+        self.view.addGestureRecognizer(longPressRecognizer)
+
     } // end viewDidLoad
 
     // Session modes
@@ -171,9 +178,11 @@ class ViewController: UIViewController {
         }
     }
 
-    override func touchesBegan(touches: Set<NSObject>,
-                               withEvent event: UIEvent) {
-        switchSession()
+    // Used by the long press to switch the session mode
+    func longPress(sender: UILongPressGestureRecognizer) {
+        if sender.state == UIGestureRecognizerState.Began {
+            switchSession()
+        }
     }
 
 }
