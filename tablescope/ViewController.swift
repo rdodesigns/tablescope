@@ -97,11 +97,11 @@ class ViewController: UIViewController {
         let order_stop = calendar!.compareDate(now, toDate: stopToday!,
             toUnitGranularity: .CalendarUnitMinute)
 
-        // TODO: If we switch to Swift 1.2+, use the late binding let 
+        // TODO: If we switch to Swift 1.2+, use the late binding let
         // instead of var.
         //
         // Here we will start the manipulations of the [start/stop]Today
-        // dates to reflect the correct days to trigger on. This case 
+        // dates to reflect the correct days to trigger on. This case
         // corresponds to being in the morning night session.
         var startDate = startToday!
         var stopDate = stopToday!
@@ -111,7 +111,7 @@ class ViewController: UIViewController {
         if now < startToday && now >= stopToday {
             daySession()
 
-            // We are during the day so we need to move the stop date to 
+            // We are during the day so we need to move the stop date to
             // trigger tomorrow for the first time (today's time has passed)
             stopDate = stopToday!.dateByAddingTimeInterval(year_in_sec)
         } else {
@@ -138,6 +138,7 @@ class ViewController: UIViewController {
 
     } // end viewDidLoad
 
+    // Session modes
     func daySession() -> Void {
         UIScreen.mainScreen().brightness = CGFloat(1)
 
