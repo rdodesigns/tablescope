@@ -16,7 +16,7 @@
 import UIKit
 import AVFoundation
 
-let year_in_sec : NSTimeInterval = 86400
+let day_in_sec : NSTimeInterval = 86400
 
 let sleepTimeStart = (hour: 20, minute: 10)
 let sleepTimeStop = (hour: 8, minute: 30)
@@ -94,7 +94,7 @@ class ViewController: UIViewController {
 
             // We are during the day so we need to move the stop date to
             // trigger tomorrow for the first time (today's time has passed)
-            stopDate = stopToday!.dateByAddingTimeInterval(year_in_sec)
+            stopDate = stopToday!.dateByAddingTimeInterval(day_in_sec)
         } else {
             nightSession()
 
@@ -102,19 +102,19 @@ class ViewController: UIViewController {
             // the start and the stop stop date to trigger tomorrow for the
             // first time (today's time has passed)
             if now >= startToday {
-                startDate = startToday!.dateByAddingTimeInterval(year_in_sec)
-                stopDate = stopToday!.dateByAddingTimeInterval(year_in_sec)
+                startDate = startToday!.dateByAddingTimeInterval(day_in_sec)
+                stopDate = stopToday!.dateByAddingTimeInterval(day_in_sec)
             }
 
         }
 
         // Finally set the timers.
         Timer.scheduledTimerWithTimeInterval(
-            startDate, interval: year_in_sec,
+            startDate, interval: day_in_sec,
             repeats: true, f: { self.nightSession() })
 
         Timer.scheduledTimerWithTimeInterval(
-            stopDate, interval: year_in_sec,
+            stopDate, interval: day_in_sec,
             repeats: true, f: { self.daySession() })
 
         // If we press down on the screen for 2 seconds switch current
