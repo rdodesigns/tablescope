@@ -6,6 +6,9 @@
 //  Copyright (c) 2015 cellscope. All rights reserved.
 //
 
+// TODO: Make this not backwards (specify start time as the start of the
+// day mode instead of the start of the night mode).
+
 // Taken from the tutorial at
 // jamesonquave.com/blog/
 // taking-control-of-the-iphone-camera-in-ios-8-with-swift-part-1/
@@ -13,15 +16,19 @@
 import UIKit
 import AVFoundation
 
-let year_in_sec : NSTimeInterval = 84600
+let year_in_sec : NSTimeInterval = 86400
 
-let sleepTimeStart = (hour: 17, minute: 30)
+let sleepTimeStart = (hour: 20, minute: 10)
 let sleepTimeStop = (hour: 8, minute: 30)
 
 class ViewController: UIViewController {
 
+    var startToday : NSDate?
+    var stopToday : NSDate?
+
     let captureSession = AVCaptureSession()
     var previewLayer : AVCaptureVideoPreviewLayer?
+
 
     // If we find a device we'll store it here for later use
     var captureDevice : AVCaptureDevice?
@@ -69,35 +76,7 @@ class ViewController: UIViewController {
         // When starting the app, we are going to figure out if we are
         // in a night session time or a day session time.
         let now = NSDate()
-        let calendar = NSCalendar(
-                        calendarIdentifier: NSCalendarIdentifierGregorian)
-
-        // The components and [start/stop]Today are specified for a start
-        // and stop time that are both in the current day. This situation
-        // only occurs if we are before the stop time on the current day.
-        // Otherwise we will need to either add a day to the start or the
-        // end dates in order to trigger them correctly.
-        let start_components = calendar!.components(.CalendarUnitYear |
-            .CalendarUnitMonth | .CalendarUnitDay, fromDate: now)
-        start_components.hour = sleepTimeStart.hour
-        start_components.minute = sleepTimeStart.minute
-
-        let startToday = calendar!.dateFromComponents(start_components)
-
-
-        let stop_components = calendar!.components(.CalendarUnitYear |
-            .CalendarUnitMonth | .CalendarUnitDay, fromDate: startToday!)
-        stop_components.hour = sleepTimeStop.hour
-        stop_components.minute = sleepTimeStop.minute
-
-        let stopToday = calendar!.dateFromComponents(stop_components)
-
-        // Ordering is a bit strange, but .OrderedAscending is when today
-        // is before the queried time
-        let order_start = calendar!.compareDate(now, toDate: startToday!,
-            toUnitGranularity: .CalendarUnitMinute)
-        let order_stop = calendar!.compareDate(now, toDate: stopToday!,
-            toUnitGranularity: .CalendarUnitMinute)
+        setStartStopDate(now)
 
         // TODO: If we switch to Swift 1.2+, use the late binding let
         // instead of var.
@@ -184,5 +163,43 @@ class ViewController: UIViewController {
             switchSession()
         }
     }
+
+    func modeWakeUpFromBackground(){
+        let now = NSDate()
+
+        if now < startToday && now >= stopToday {
+            daySession()
+
+        } else {
+            nightSession()
+
+        }
+    }
+
+    func setStartStopDate(now : NSDate) {
+        let calendar = NSCalendar(
+            calendarIdentifier: NSCalendarIdentifierGregorian)
+
+        // The components and [start/stop]Today are specified for a start
+        // and stop time that are both in the current day. This situation
+        // only occurs if we are before the stop time on the current day.
+        // Otherwise we will need to either add a day to the start or the
+        // end dates in order to trigger them correctly.
+        let start_components = calendar!.components(.CalendarUnitYear |
+            .CalendarUnitMonth | .CalendarUnitDay, fromDate: now)
+        start_components.hour = sleepTimeStart.hour
+        start_components.minute = sleepTimeStart.minute
+
+        self.startToday = calendar!.dateFromComponents(start_components)
+
+
+        let stop_components = calendar!.components(.CalendarUnitYear |
+            .CalendarUnitMonth | .CalendarUnitDay, fromDate: startToday!)
+        stop_components.hour = sleepTimeStop.hour
+        stop_components.minute = sleepTimeStop.minute
+
+        self.stopToday = calendar!.dateFromComponents(stop_components)
+    }
+
 
 }
