@@ -50,16 +50,16 @@ class ViewController: UIViewController {
                     captureDevice = device as? AVCaptureDevice
                     if captureDevice != nil {
 
-                        var err : NSError? = nil
                         captureSession.sessionPreset =
                             AVCaptureSessionPresetPhoto
-                        captureSession.addInput(
-                            AVCaptureDeviceInput(device: captureDevice,
-                                                 error: &err))
+                        do {
+                            try captureSession.addInput(
+                            AVCaptureDeviceInput(device: captureDevice))
+                        } catch {
+                            print("error initializing device")
 
-                        if err != nil {
-                            println("error: \(err?.localizedDescription)")
                         }
+                        
                     }
                 }
             }
@@ -134,7 +134,7 @@ class ViewController: UIViewController {
             previewLayer =
                 AVCaptureVideoPreviewLayer(session: captureSession)
             previewLayer?.transform = CATransform3DMakeScale(-1, -1, 1)
-            self.view.layer.addSublayer(previewLayer)
+            self.view.layer.addSublayer(previewLayer!)
             previewLayer?.frame = self.view.layer.frame
             captureSession.startRunning()
         }
@@ -185,16 +185,16 @@ class ViewController: UIViewController {
         // only occurs if we are before the stop time on the current day.
         // Otherwise we will need to either add a day to the start or the
         // end dates in order to trigger them correctly.
-        let start_components = calendar!.components(.CalendarUnitYear |
-            .CalendarUnitMonth | .CalendarUnitDay, fromDate: now)
+        let start_components = calendar!.components([.Year, .Month, .Day],
+            fromDate: now)
         start_components.hour = sleepTimeStart.hour
         start_components.minute = sleepTimeStart.minute
 
         self.startToday = calendar!.dateFromComponents(start_components)
 
 
-        let stop_components = calendar!.components(.CalendarUnitYear |
-            .CalendarUnitMonth | .CalendarUnitDay, fromDate: startToday!)
+        let stop_components = calendar!.components([.Year, .Month, .Day],
+            fromDate: startToday!)
         stop_components.hour = sleepTimeStop.hour
         stop_components.minute = sleepTimeStop.minute
 

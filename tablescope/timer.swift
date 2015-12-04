@@ -76,7 +76,7 @@ class Timer {
                                               repeats : Bool,
                                               f : () -> ())
     {
-        var t = Timer(interval: interval, repeats: repeats, f: f)
+        let t = Timer(interval: interval, repeats: repeats, f: f)
         NSRunLoop.mainRunLoop().addTimer(t.timer!,
             forMode: NSRunLoopCommonModes)
     }
@@ -101,7 +101,7 @@ class Timer {
                                               repeats : Bool,
                                               f : () -> ())
     {
-        var t = Timer(fireDate: fireDate, interval: interval,
+        let t = Timer(fireDate: fireDate, interval: interval,
             repeats: repeats, f: f)
         NSRunLoop.mainRunLoop().addTimer(t.timer!,
             forMode: NSRunLoopCommonModes)

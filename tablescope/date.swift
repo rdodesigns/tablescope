@@ -12,7 +12,6 @@ import Foundation
 // the code much more readable versus determining whether the order of
 // the dates is ascending or descending.
 
-extension NSDate: Equatable {}
 
 public func ==(lhs: NSDate, rhs: NSDate) -> Bool {
     // Naïve equality that uses string comparison rather than resolving equivalent selectors
