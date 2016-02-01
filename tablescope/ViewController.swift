@@ -59,7 +59,7 @@ class ViewController: UIViewController {
                             print("error initializing device")
 
                         }
-                        
+
                     }
                 }
             }
@@ -133,7 +133,7 @@ class ViewController: UIViewController {
         if !captureSession.running{
             previewLayer =
                 AVCaptureVideoPreviewLayer(session: captureSession)
-            previewLayer?.transform = CATransform3DMakeScale(-1, -1, 1)
+            //previewLayer?.transform = CATransform3DMakeScale(-1, -1, 1)
             self.view.layer.addSublayer(previewLayer!)
             previewLayer?.frame = self.view.layer.frame
             captureSession.startRunning()
